@@ -1,0 +1,56 @@
+# method chain  user:pw 	url 	response_code
+GET     sshd     user:pass  /           	            	200
+GET     sshd     user:pass  /chain/$chain      		        200
+GET     sshd     user:pass  /chain/$chain/ipv4/1.2.3.4       	200
+GET     sshd     user:pass  /metrics                            200
+GET     sshd     user:pass  /chain/$chain/ipv4/0.156.3.4     	200
+# 201
+PUT     sshd     user:pass  /chain/$chain/ipv4/1.2.3.4        	201
+PUT     sshd     user:pass  /chain/$chain/ipv4/1.2.3.4        	201
+PUT     sshd     user:pass  /chain/$chain/ipv4/1.2.3.44       	201
+PUT     sshd     user:pass  /chain/$chain/ipv4/001.02.3.044   	201
+PUT     sshd     user:pass  /chain/$chain/ipv4/10.20.30.40    	201
+GET     sshd     user:pass  /chain/$chain/ipv4/10.20.30.40    	200
+GET     sshd     user:pass  /chain/$chain      		        200
+# 400
+GET     sshd     user:pass  /chain/notMyChain                	400
+GET     sshd     user:pass  /chain/$chain/ipv4/1.256.3.4        400
+GET     sshd     user:pass  /chain/$chain/ipv4/2.0.156.3.4      400
+GET     sshd     user:pass  /chain/$chain/ipv4/[::1]            400
+GET     sshd     user:pass  /chain/$chain/ipv4/2. 0.156.3       400
+GET     sshd     user:pass  /chain/$chain/ipv4/2..156.4         400
+# 401
+GET     sshd     use:pass   /                                 	401
+GET     sshd     use:pass   /chain/$chain                       401
+GET     sshd     use:pass   /chain/$chain/ipv4/1.2.3.4          401
+GET     sshd     use:pass   /metrics                          	401
+# 404
+GET     sshd     user:pass   /mist                              404
+GET     sshd     user:pass   /chain/a_chain/                    404
+GET     sshd     user:pass   /chain/a_chain/ipv4/1.2.3.4/       404 
+GET     sshd     user:pass   /metrics/                          404
+GET     sshd     user:pass   /chain/notMyChain/10.20.30.40      404
+# 405
+PUT     sshd     user:pass  /                                   405
+PUT     sshd     user:pass  /chain/a_chain                      405
+PUT     sshd     user:pass  /metrics                            405
+DEL     sshd     user:pass  /chain/$chain/ipv4/1.2.3.44      	405
+# put and delete
+PUT     sshd     user:pass  /chain/$chain/ipv4/110.20.30.40    	201
+DELETE  sshd     user:pass  /chain/$chain/ipv4/110.20.30.40    	204
+PUT     sshd     user:pass  /chain/$chain/ipv4/110.020.030.041 	201
+DELETE  sshd     user:pass  /chain/$chain/ipv4/110.20.30.41    	204
+DELETE  sshd     user:pass  /chain/$chain/ipv4/110.20.30.41    	404
+PUT     sshd     user:pass  /chain/$chain/ipv4/110.020.030.042 	201
+DELETE  sshd     user:pass  /chain/$chain/ipv4/110.20.30.42    	204
+GET     sshd     user:pass  /chain/$chain                      	200
+#
+PUT     httpd     user:pass  /chain/$chain/ipv4/11.20.30.40    	201
+DELETE  httpd     user:pass  /chain/$chain/ipv4/11.20.30.40    	204
+PUT     httpd     user:pass  /chain/$chain/ipv4/11.020.030.041 	201
+DELETE  httpd     user:pass  /chain/$chain/ipv4/11.20.30.41    	204
+DELETE  httpd     user:pass  /chain/$chain/ipv4/11.20.30.41    	404
+PUT     httpd     user:pass  /chain/$chain/ipv4/11.020.030.042 	201
+DELETE  httpd     user:pass  /chain/$chain/ipv4/11.20.30.42    	204
+GET     httpd     user:pass  /chain/$chain                     	200
+# 500

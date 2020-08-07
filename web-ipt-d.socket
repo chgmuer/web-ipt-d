@@ -1,0 +1,14 @@
+[Unit]
+Description=socket activation for web-ipt-d
+# PartOf=web-ipt-d.service
+
+[Socket]
+ListenStream = 8820
+BindIPv6Only = both
+
+[Install]
+WantedBy = sockets.target
+
+# man page eg https://www.freedesktop.org/software/systemd/man/systemd.socket.html
+# BindToDevice=
+# 

@@ -1,0 +1,16 @@
+{
+    "basic_auth_user": "",
+    "basic_auth_pw": "",
+    "debug_enabled": true,
+    "ipt_chains": [
+        "httpd",
+        "sshd"
+    ],
+    "cert_file": "/home/chgmuer/dev/goProjects/web-ipt-d/tls/cert.pem",
+    "key_file": "/home/chgmuer/dev/goProjects/web-ipt-d/tls/key.pem",
+    "srv_max_header_bytes": 4096,
+    "srv_idle_timeout": "1m0s",
+    "srv_read_timeout": "5s",
+    "srv_write_timeout": "10s",
+    "tls_min_version": "1.2"
+}

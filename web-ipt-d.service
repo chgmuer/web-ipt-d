@@ -1,0 +1,17 @@
+[Unit]
+Description=iptables web interface service
+# Requires=web-ipt-d.socket
+
+[Service]
+Type=notify
+ExecStart=/usr/sbin/web-ipt-d -config=/etc/web-ipt-d/config.json
+WatchdogSec=30s
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+
+# ExecStart=/usr/sbin/web-ipt-d
+# ExecReload=/bin/kill -s HUP $MAINPID
+# ExecStop=/bin/kill -s QUIT $MAINPID
+# PrivateTmp=true

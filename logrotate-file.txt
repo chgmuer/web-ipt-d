@@ -1,0 +1,16 @@
+# create this file with the name web-ipt-d in directory /etc/logrotate.d/
+# 
+# test with sudo logrotate -f -v /etc/logrotate.d/web-ipt-d
+
+/var/log/web-ipt-d.log {
+  	su root root
+	daily
+	missingok
+    rotate 5
+	compress
+	create
+	copytruncate
+	dateext
+	dateformat -%Y-%m-%d
+	dateyesterday
+}
